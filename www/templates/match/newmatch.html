@@ -1,0 +1,34 @@
+<ion-view view-title="New Match" hide-back-button="true" class="new-match">
+    <ion-content>
+        <div class="content" ng-click="hideAutoComplete()">
+            <form class="list" name="matchform" novalidate>
+
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Team A</span>
+                    <input type="text" ng-hide-on-enter maxlength="30" placeholder="Enter Team Name A" ng-model="data.team1" ng-change="searchTeam('team1', data.team1)" autocomplete="off">
+                </label>
+                <div class="autocomplete" ng-include="'templates/match/_autocompleteteam1.html'"></div>
+
+                <ion-checkbox ng-change="useMyTeam()" ng-model="data.isMyTeam" class="item-checkbox-right">My Team</ion-checkbox>
+
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Team B</span>
+                    <input type="text" ng-hide-on-enter maxlength="30" placeholder="Enter Team Name B" ng-model="data.team2" ng-change="searchTeam('team2', data.team2)"  autocomplete="off">                
+                </label>
+                <div class="autocomplete" ng-include="'templates/match/_autocompleteteam2.html'"></div>
+
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Match Location</span>
+                    <input type="text" ng-hide-on-enter placeholder="Enter Match Location" ng-model="data.location" autocomplete="off">
+                </label>
+            </form>
+        </div>
+    </ion-content>
+    <ion-footer-bar align-title="left" class="button-footer-wrap">
+        <div class="button-footer">
+            <button class="button icon icon-right ion-chevron-right hide-on-keyboard-open" ng-click="startMatch()">
+                Start Tracking
+            </button>
+        </div>
+    </ion-footer-bar>
+</ion-view>

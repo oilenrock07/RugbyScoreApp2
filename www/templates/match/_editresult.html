@@ -1,0 +1,78 @@
+<ion-content class="edit-result">
+    <div class="content divider-top">
+        <div class="row">
+            <div class="col" style="padding-right: 10px;">
+                <div class="label-score align-right divider" ng-bind="team1Score()"></div>
+                <div class="divider">
+                    <input type="text" ng-hide-on-enter ng-model="data.team1" select-on-click ng-change="searchTeam('team1', data.team1)" autocomplete="off" />
+                    <div ng-include="'templates/match/_autocompleteteam1.html'"></div>
+                </div>
+                <div>Trys</div>
+                <div class="divider"><input type="number" ng-hide-on-enter ng-model="data.team1Try" select-on-click/></div>
+                <div>Conversions</div>
+                <div class="divider"><input type="number" ng-hide-on-enter ng-model="data.team1Conversion" select-on-click/></div>
+                <div>Drop Goals</div>
+                <div class="divider"><input type="number" ng-hide-on-enter ng-model="data.team1DropGoal" select-on-click/></div>
+                <div>Penalty</div>
+                <div class="divider"><input type="number" ng-hide-on-enter ng-model="data.team1Penalty" select-on-click/></div>
+            </div>
+            <div class="col-divider">
+                <div class="ion-minus-round divider"></div>
+                <div class="divider"><strong>V</strong></div>
+                <div class="vertical-divider">&nbsp;</div>
+                <div class="vertical-divider">&nbsp;</div>
+                <div class="vertical-divider">&nbsp;</div>
+                <div class="vertical-divider">&nbsp;</div>
+                <div class="vertical-divider">&nbsp;</div>
+                <div class="vertical-divider">&nbsp;</div>
+                <div class="vertical-divider">&nbsp;</div>
+                <div class="vertical-divider">&nbsp;</div>
+            </div>
+            <div class="col" style="padding-left: 10px;"">
+                    <div class="label-score align-left divider" ng-bind="team2Score()"></div>
+                    <div class="divider">
+                        <input type="text" ng-hide-on-enter ng-model="data.team2" select-on-click ng-change="searchTeam('team2', data.team2)" autocomplete="off"/>
+                    <div ng-include=" 'templates/match/_autocompleteteam2.html'"></div>
+                    </div>
+                    <div>Trys</div>
+                    <div class="divider"><input type="number" ng-hide-on-enter ng-model="data.team2Try" select-on-click/></div>
+                    <div>Conversions</div>
+                    <div class="divider"><input type="number" ng-hide-on-enter ng-model="data.team2Conversion" select-on-click/></div>
+                    <div>Drop Goals</div>
+                    <div class="divider"><input type="number" ng-hide-on-enter ng-model="data.team2DropGoal" select-on-click/></div>
+                    <div>Penalty</div>
+                    <div class="divider"><input type="number" ng-hide-on-enter ng-model="data.team2Penalty" select-on-click/></div>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="sub-content">
+                <div class="row divider">
+                    <div class="col-40 no-padding">
+                        <div>Match Date</div>
+                        <div><input type="text" ng-hide-on-enter ng-model="data.matchDate" select-on-click/></div>
+                    </div>
+                    <div class="col">
+                    </div>
+                    <div class="col-40 no-padding">
+                        <div class="">Match Time</div>
+                        <div><input type="text" ng-hide-on-enter ng-model="data.matchTime" select-on-click/></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-100 no-padding">
+                        <div>Match Location</div>
+                        <div><input type="text" ng-hide-on-enter ng-model="data.location" select-on-click/></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+    <ion-footer-bar align-title="left" class="button-footer-wrap">
+        <div class="button-footer">
+            <button class="button icon icon-right ion-chevron-right hide-on-keyboard-open" ng-click="saveScore(data.matchId)">
+                Save
+            </button> 
+        </div>
+    </ion-footer-bar>

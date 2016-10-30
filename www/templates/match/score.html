@@ -1,0 +1,84 @@
+<ion-view view-title="Final Score" hide-back-button="true" class="score">
+    <ion-header-bar class="bar-positive"></ion-header-bar>
+    <ion-header-bar class="bar-stable bar-subheader">
+        <button class="button button-clear button-positive" ng-click="deleteScore()">
+            <strong>Delete Result</strong>
+        </button>
+        <button class="button button-clear button-positive" ng-click="editScore()">
+            <strong>Edit Result</strong>
+        </button>
+    </ion-header-bar>
+
+    <ion-content>
+        <div class="content divider-top">
+            <div class="row">
+                <div class="col" style="padding-right: 10px;">
+                    <div class="label-score align-right divider" ng-bind="team1Score()"></div>
+                    <div class="divider align-right team-name"><strong>{{data.team1}}</strong></div>
+                    <div>Trys</div>
+                    <div class="divider">{{data.team1Try}}</div>
+                    <div>Conversions</div>
+                    <div class="divider">{{data.team1Conversion}}</div>
+                    <div>Drop Goals</div>
+                    <div class="divider">{{data.team1DropGoal}}</div>
+                    <div>Penalty</div>
+                    <div class="divider">{{data.team1Penalty}}</div>
+                </div>
+                <div class="col-divider">
+                    <div class="ion-minus-round divider"></div>
+                    <div class="divider"><strong>V</strong></div>
+                    <div class="vertical-divider">&nbsp;</div>
+                    <div class="vertical-divider">&nbsp;</div>
+                    <div class="vertical-divider">&nbsp;</div>
+                    <div class="vertical-divider">&nbsp;</div>
+                    <div class="vertical-divider">&nbsp;</div>
+                    <div class="vertical-divider">&nbsp;</div>
+                    <div class="vertical-divider">&nbsp;</div>
+                    <div class="vertical-divider">&nbsp;</div>
+                </div>
+                <div class="col" style="padding-left: 10px;padding-right: 10px;">
+                    <div class="label-score divider" ng-bind="team2Score()" ></div>
+                    <div class="divider team-name"><strong>{{data.team2}}</strong></div>
+                    <div>Trys</div>
+                    <div class="divider">{{data.team2Try}}</div>
+                    <div>Conversions</div>
+                    <div class="divider">{{data.team2Conversion}}</div>
+                    <div>Drop Goals</div>
+                    <div class="divider">{{data.team2DropGoal}}</div>
+                    <div>Penalty</div>
+                    <div class="divider">{{data.team2Penalty}}</div>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="sub-content">
+                <div class="row">
+                    <div class="col-50 no-padding">
+                        <div>Match Date</div>
+                        <div class="divider">{{data.matchDate}}</div>
+                    </div>
+                    <div class="col">
+                    </div>
+                    <div class="col-50 no-padding">
+                        <div class="">Match Time</div>
+                        <div>{{data.matchTime}}</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col no-padding">
+                        <div>Match Location</div>
+                        <div>{{data.location}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>  
+    </ion-content>
+    <ion-footer-bar align-title="left" class="button-footer-wrap">
+        <div class="button-footer">
+            <button class="button icon icon-right ion-chevron-right hide-on-keyboard-open" ng-click="saveResult()">
+                Save Result
+            </button> 
+        </div>
+    </ion-footer-bar> 
+</ion-view>
