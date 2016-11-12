@@ -1,6 +1,6 @@
 angular.module('rugbyapp.controllers', ['rugbyapp.filters'])
 
-    .controller('AppController', function ($scope, $rootScope, $state, $ionicHistory, MatchFactory, SettingFactory, TeamFactory) {
+    .controller('AppController', function ($scope, $ionicPopup, $rootScope, $state, $ionicHistory, MatchFactory, SettingFactory, TeamFactory) {
         $rootScope.page = "new-match";
         $rootScope.back = function () {
             $ionicHistory.goBack();
@@ -8,11 +8,9 @@ angular.module('rugbyapp.controllers', ['rugbyapp.filters'])
 
         $scope.icon = 'new-match-icon';
 
-        $scope.showMyTeam = function () {
+        var redirectToMTeam = function () {
             $rootScope.page = "my-team";
             $scope.icon = 'my-team-icon';
-
-
             var myTeam = SettingFactory.myTeam;
             if (myTeam != 0) {
                 var team = TeamFactory.get(myTeam);
@@ -22,9 +20,9 @@ angular.module('rugbyapp.controllers', ['rugbyapp.filters'])
                 TeamFactory.resetEntity();
             }
             $state.go('app.myteam');
-        };
+        }
 
-        $scope.showMatch = function () {
+        var redirectToNewMatch = function () {
             $rootScope.page = "new-match";
             $scope.icon = 'new-match-icon';
 
@@ -32,18 +30,59 @@ angular.module('rugbyapp.controllers', ['rugbyapp.filters'])
             MatchFactory.match.team2 = '';
             MatchFactory.resetEntity();
             $state.go('app.newmatch');
-        };
+        }
 
-        $scope.showTeams = function () {
+        var redirectToTeams = function () {
             TeamFactory.searchTeams = TeamFactory.teams;
             $rootScope.page = "team";
             $scope.icon = 'team-icon';
             $state.go('app.teams');
+        }
+
+        var redirectToAbout = function () {
+            $rootScope.page = "about";
+            $state.go('app.aboutmain');
+        }
+
+        var redirectToResults = function () {
+            $scope.icon = 'result-icon';
+            $rootScope.page = "results";
+
+            MatchFactory.searchMatch = MatchFactory.matches;
+            $state.go('app.results');
+        }
+
+        var showLeavingConfirmation = function (redirect) {
+            if ($state.current.name == 'app.match') {
+                var confirmPopup = $ionicPopup.confirm({
+                    title: 'Important',
+                    template: 'If you leave the tracking screen you will lose your current score. Are you sure you want to leave?',
+                    cancelText: 'No',
+                    okText: 'Yes'
+                }).then(function (res) {
+                    if (res) {
+                        redirect();
+                    }
+                });
+            }
+            else
+                redirect();
+        }
+
+        $scope.showMyTeam = function () {
+            showLeavingConfirmation(redirectToMTeam);
+        };
+
+        $scope.showMatch = function () {
+            showLeavingConfirmation(redirectToNewMatch);
+        };
+
+        $scope.showTeams = function () {
+            showLeavingConfirmation(redirectToTeams);
         };
 
         $scope.showAboutMain = function () {
-            $rootScope.page = "about";
-            $state.go('app.aboutmain');
+            showLeavingConfirmation(redirectToAbout);
         };
 
         $scope.showScore = function () {
@@ -57,11 +96,7 @@ angular.module('rugbyapp.controllers', ['rugbyapp.filters'])
         };
 
         $scope.showResults = function () {
-            $scope.icon = 'result-icon';
-            $rootScope.page = "results";
-
-            MatchFactory.searchMatch = MatchFactory.matches;
-            $state.go('app.results');
+            showLeavingConfirmation(redirectToResults);
         };
     })
 
@@ -128,7 +163,7 @@ angular.module('rugbyapp.controllers', ['rugbyapp.filters'])
                 }
             }
 
-            return [ team11stLine, team12ndLine ];
+            return [team11stLine, team12ndLine];
         }
 
         $scope.showAutoCompleteTeam1 = false;
@@ -316,6 +351,7 @@ angular.module('rugbyapp.controllers', ['rugbyapp.filters'])
             if ($scope.data.isMyTeam) {
                 if (SettingFactory.myTeam == 0) {
                     TeamFactory.resetEntity();
+                    TeamFactory.team.fullTeamName = $scope.data.team1;
                     $state.go('app.addmyteam');
                 }
                 else {
@@ -468,7 +504,7 @@ angular.module('rugbyapp.controllers', ['rugbyapp.filters'])
             ctx.fillStyle = "black";
             ctx.font = "bold 27px Arial";
             ctx.textAlign = "left";
-            ctx.fillText('Rugby Score Tracker',185, 65);
+            ctx.fillText('Rugby Score Tracker', 185, 65);
 
             ctx.font = "18px Arial";
             ctx.textAlign = "left";

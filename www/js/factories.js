@@ -69,33 +69,42 @@ angular.module('rugbyapp.factories', ['ngCordova'])
 
         if (!isTeam1Exists || !isTeam2Exists) {
 
-          var newTeam = {
-            teamId: 0,
-            isMyTeam: false,
-            fullTeamName: '',
-            abbrTeamName: '',
-            clubAddress: '',
-            townCity: '',
-            country: '',
-            postCode: ''
-          };
-
           if (!isTeam1Exists) {
-            newTeam.fullTeamName = match.team1;
-            DataFactory.team.createTeam(newTeam, function (id) {
-              newTeam.teamId = id;
-              TeamFactory.teams.push(newTeam);
+            var teamA = {
+              teamId: 0,
+              isMyTeam: false,
+              fullTeamName: match.team1,
+              abbrTeamName: '',
+              clubAddress: '',
+              townCity: '',
+              country: '',
+              postCode: ''
+            };
+            DataFactory.team.createTeam(teamA, function (id) {
+              teamA.teamId = id;
+              TeamFactory.teams.push(teamA);
             });
           }
 
           if (!isTeam2Exists) {
-            newTeam.fullTeamName = match.team2;
-            DataFactory.team.createTeam(newTeam, function (id) {
-              newTeam.teamId = id;
-              TeamFactory.teams.push(newTeam);
+            var teamB = {
+              teamId: 0,
+              isMyTeam: false,
+              fullTeamName: match.team2,
+              abbrTeamName: '',
+              clubAddress: '',
+              townCity: '',
+              country: '',
+              postCode: ''
+            };
+
+            DataFactory.team.createTeam(teamB, function (id) {
+              teamB.teamId = id;
+              TeamFactory.teams.push(teamB);
             });
           }
         }
+
 
         callBack();
       });
