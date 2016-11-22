@@ -3,7 +3,7 @@ angular.module('rugbyapp.data', ['ngCordova'])
         database = null;
 
         var createTables = function () {
-            $cordovaSQLite.execute(database, "CREATE TABLE IF NOT EXISTS team (teamId integer primary key, abbrTeamName text, fullTeamName text, clubAddress text, townCity text, country text, postCode text)");
+            $cordovaSQLite.execute(database, "CREATE TABLE IF NOT EXISTS team (teamId integer primary key, teamName text, fullClubName text, clubAddress text, townCity text, country text, postCode text)");
             $cordovaSQLite.execute(database, "CREATE TABLE IF NOT EXISTS match (matchId integer primary key, team1 integer, team2 integer, matchDate text, matchTime text, location text, team1Try integer, team1Penalty integer, team1Conversion integer, team1DropGoal integer, team2Try integer, team2Penalty integer, team2Conversion integer, team2DropGoal integer)");
             $cordovaSQLite.execute(database, "CREATE TABLE IF NOT EXISTS settings (settingsId integer primary key, teamId integer)");
         };
@@ -14,7 +14,7 @@ angular.module('rugbyapp.data', ['ngCordova'])
                 createTables();
             }
             catch (ex) {
-                alert(ex);
+                alert(JSON.stringify(ex));
             }
         }
 
@@ -35,13 +35,13 @@ angular.module('rugbyapp.data', ['ngCordova'])
                 });
             }
             catch (ex) {
-                alert(ex);
+                alert(JSON.stringify(ex));
             }
         }
 
         //MATCH******************************************************************
         var loadMatches = function (callBack) {
-            executeQuery('SELECT * FROM match', [], callBack);
+            executeQuery('SELECT m.*, IFNULL(t1.teamName, \'\') AS teamName1, IFNULL(t2.teamName,\'\') AS teamName2 FROM match m LEFT JOIN team t1 ON m.team1 = t1.teamId LEFT JOIN team t2 ON m.team2 = t2.teamId', [], callBack);
         }
 
         var createMatch = function (match, callBack) {
@@ -82,13 +82,13 @@ angular.module('rugbyapp.data', ['ngCordova'])
         }
 
         var createTeam = function (team, callBack) {
-            var query = "INSERT INTO team (abbrTeamName, fullTeamName, clubAddress, townCity, country, postCode) VALUES (?,?,?,?,?,?)";
-            insert(query, [team.abbrTeamName, team.fullTeamName, team.clubAddress, team.townCity, team.country, team.postCode], callBack);
+            var query = "INSERT INTO team (teamName, fullClubName, clubAddress, townCity, country, postCode) VALUES (?,?,?,?,?,?)";
+            insert(query, [team.teamName, team.fullClubName, team.clubAddress, team.townCity, team.country, team.postCode], callBack);
         }
 
         var updateTeam = function (team, callBack) {
-            var query = "UPDATE team SET abbrTeamName = ?, fullTeamName = ?, clubAddress = ?, townCity = ?, country=?, postCode=? WHERE teamId=?";
-            executeQuery(query, [team.abbrTeamName, team.fullTeamName, team.clubAddress, team.townCity, team.country, team.postCode, team.teamId], callBack);
+            var query = "UPDATE team SET teamName = ?, fullClubName = ?, clubAddress = ?, townCity = ?, country=?, postCode=? WHERE teamId=?";
+            executeQuery(query, [team.teamName, team.fullClubName, team.clubAddress, team.townCity, team.country, team.postCode, team.teamId], callBack);
         }
 
         var updateMatchTeamName = function (oldTeamName, newTeamName) {

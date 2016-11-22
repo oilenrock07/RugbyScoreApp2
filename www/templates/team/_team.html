@@ -1,18 +1,18 @@
 <ion-content>
     <div class="content team-wrap divider-top">
-        <div class="team-label row">Abbreviated Team Name&nbsp;</div>
-        <div class="row divider" ng-bind-html="data.abbrTeamName"></div>
-
         <div class="team-label row">Team Name&nbsp;</div>
-        <div class="row divider item-text-wrap" ng-bind-html="data.fullTeamName"></div>
+        <div class="row divider" ng-bind-html="data.teamName"></div>
 
-        <div class="row team-label">Location&nbsp;</div>
-        <div class="row divider" ng-bind-html="data.townCity"></div>
+        <div class="team-label row">Full Club Name&nbsp;</div>
+        <div class="row divider item-text-wrap" ng-bind-html="data.fullClubName"></div>
 
         <div class="row team-label">Club Address&nbsp;</div>
         <div class="row divider" ng-bind-html="data.clubAddress"></div>
 
-        <div class="row team-label">Post Code&nbsp;</div>
+        <div class="row team-label">Town/City&nbsp;</div>
+        <div class="row divider" ng-bind-html="data.townCity"></div>
+
+        <div class="row team-label">Post/Zip Code&nbsp;</div>
         <div class="row divider" ng-bind-html="data.postCode"></div>
 
         <hr/>
@@ -27,7 +27,7 @@
         <div class="row sub-content" ng-if="teamLastMatch != null">
             <div class="col-50" style="padding-right: 10px;">
                 <div class="label-score align-right divider">{{(teamLastMatch.team1Try + teamLastMatch.team1Conversion + teamLastMatch.team1Penalty + teamLastMatch.team1DropGoal)}}</div>
-                <div class="divider align-right"><strong>{{teamLastMatch.team1}}</strong></div>
+                <div class="divider align-right"><strong>{{teamLastMatch.teamName1}}</strong></div>
             </div>
             <div class="col">
                 <div class="ion-minus-round divider" style="padding-bottom: 10px;"></div>
@@ -35,14 +35,14 @@
             </div>
             <div class="col-50" style="padding-left: 10px;">
                 <div class="label-score divider">{{(teamLastMatch.team2Try + teamLastMatch.team2Conversion + teamLastMatch.team2Penalty + teamLastMatch.team2DropGoal)}}</div>
-                <div class="divider"><strong>{{teamLastMatch.team2}}</strong></div>
+                <div class="divider"><strong>{{teamLastMatch.teamName2}}</strong></div>
             </div>
         </div>
     </div>
 </ion-content>
 <ion-footer-bar align-title="left" class="button-footer-wrap">
     <div class="button-footer">
-        <button class="button icon icon-right ion-chevron-right hide-on-keyboard-open" ng-click="teamResult(data.fullTeamName)">
+        <button class="button icon icon-right ion-chevron-right hide-on-keyboard-open" ng-click="teamResult(data.teamId)">
            {{teamResultText}}
         </button>
     </div>

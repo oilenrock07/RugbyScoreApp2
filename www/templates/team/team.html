@@ -4,7 +4,7 @@
         <button class="button button-clear button-positive" ng-click="editTeam(data.teamId)">
             <strong>Edit Team</strong>
         </button>
-        <button class="button button-clear button-positive" ng-click="openGoogleMaps(data.townCity)">
+        <button class="button button-clear button-positive" ng-click="openGoogleMaps(data.fullClubName + ' ' + data.clubAddress + ' ' + data.townCity + ' ' + data.country)">
             <strong>Directions</strong>
         </button>
     </ion-header-bar>

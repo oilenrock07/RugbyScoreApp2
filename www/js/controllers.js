@@ -26,8 +26,8 @@ angular.module('rugbyapp.controllers', ['rugbyapp.filters'])
             $rootScope.page = "new-match";
             $scope.icon = 'new-match-icon';
 
-            MatchFactory.match.team1 = '';
-            MatchFactory.match.team2 = '';
+            MatchFactory.match.teamName1 = '';
+            MatchFactory.match.teamName2 = '';
             MatchFactory.resetEntity();
             $state.go('app.newmatch');
         }
@@ -126,7 +126,9 @@ angular.module('rugbyapp.controllers', ['rugbyapp.filters'])
             team2DropGoal: MatchFactory.match.team2DropGoal,
             matchDate: MatchFactory.match.matchDate,
             matchTime: MatchFactory.match.matchTime,
-            isMyTeam: MatchFactory.match.isMyTeam
+            isMyTeam: MatchFactory.match.isMyTeam,
+            teamName1: MatchFactory.match.teamName1,
+            teamName2: MatchFactory.match.teamName2,
         };
 
 
@@ -134,8 +136,10 @@ angular.module('rugbyapp.controllers', ['rugbyapp.filters'])
         var getScopeMatch = function () {
             return {
                 matchId: $scope.data.matchId,
-                team1: $scope.data.team1.trim(),
-                team2: $scope.data.team2.trim(),
+                team1: $scope.data.team1,
+                team2: $scope.data.team2,
+                teamName1: $scope.data.teamName1.trim(),
+                teamName2: $scope.data.teamName2.trim(),
                 location: $scope.data.location,
                 team1Try: $scope.data.team1Try,
                 team1Penalty: $scope.data.team1Penalty,
@@ -178,16 +182,16 @@ angular.module('rugbyapp.controllers', ['rugbyapp.filters'])
 
         $scope.selectAutoCompleteTeam = function (team, teamName) {
             if (team == 'team1') {
-                $scope.data.team1 = teamName;
+                $scope.data.teamName1 = teamName;
                 $scope.showAutoCompleteTeam1 = false;
 
-                if ($state.current.name == 'app.match') MatchFactory.match.team1 = teamName;
+                if ($state.current.name == 'app.match') MatchFactory.match.teamName1 = teamName;
             }
             else {
-                $scope.data.team2 = teamName;
+                $scope.data.teamName2 = teamName;
                 $scope.showAutoCompleteTeam2 = false;
 
-                if ($state.current.name == 'app.match') MatchFactory.match.team2 = teamName;
+                if ($state.current.name == 'app.match') MatchFactory.match.teamName2 = teamName;
             }
 
         };
@@ -215,10 +219,10 @@ angular.module('rugbyapp.controllers', ['rugbyapp.filters'])
             }
         };
 
-        $scope.searchTeamResult = function (teamName) {
+        $scope.searchTeamResult = function (teamId) {
 
             if ($scope.data.search.length > 0) {
-                var searchResult = MatchFactory.autoCompleteTeamSearch(teamName, $scope.data.search);
+                var searchResult = MatchFactory.autoCompleteTeamSearch(teamId, $scope.data.search);
                 MatchFactory.autoCompleteTeamResult = searchResult;
                 $scope.showAutoCompleteTeamResult = true;
             }
@@ -250,8 +254,8 @@ angular.module('rugbyapp.controllers', ['rugbyapp.filters'])
 
             MatchFactory.resetEntity();
 
-            MatchFactory.match.team1 = $scope.data.team1 != '' ? $scope.data.team1 : 'TEAM A';
-            MatchFactory.match.team2 = $scope.data.team2 != '' ? $scope.data.team2 : 'TEAM B';
+            MatchFactory.match.teamName1 = $scope.data.teamName1 != '' ? $scope.data.teamName1 : 'TEAM A';
+            MatchFactory.match.teamName2 = $scope.data.teamName2 != '' ? $scope.data.teamName2 : 'TEAM B';
             MatchFactory.match.location = $scope.data.location;
             MatchFactory.match.isMyTeam = $scope.data.isMyTeam;
 
@@ -339,31 +343,30 @@ angular.module('rugbyapp.controllers', ['rugbyapp.filters'])
         };
 
         $scope.team1KeyUp = function () {
-            MatchFactory.match.team1 = $scope.data.team1;
+            MatchFactory.match.teamName1 = $scope.data.teamName1;
         };
 
         $scope.team2KeyUp = function () {
-            MatchFactory.match.team2 = $scope.data.team2;
+            MatchFactory.match.teamName2 = $scope.data.teamName2;
         };
 
         $scope.useMyTeam = function () {
-
             if ($scope.data.isMyTeam) {
                 if (SettingFactory.myTeam == 0) {
                     TeamFactory.resetEntity();
-                    TeamFactory.team.fullTeamName = $scope.data.team1;
+                    TeamFactory.team.teamName = $scope.data.teamName1;
                     $state.go('app.addmyteam');
                 }
                 else {
                     //display my team
                     var myTeam = TeamFactory.get(SettingFactory.myTeam);
                     $scope.data.teamId = myTeam.teamId;
-                    $scope.data.team1 = myTeam.fullTeamName;
+                    $scope.data.teamName1 = myTeam.teamName;
                 }
             }
             else {
                 $scope.data.teamId = 0;
-                $scope.data.team1 = '';
+                $scope.data.teamName1 = '';
             }
         };
 
@@ -670,7 +673,7 @@ angular.module('rugbyapp.controllers', ['rugbyapp.filters'])
             })
         }
 
-        $scope.teamSearch = function (teamName) {
+        $scope.teamSearch = function (teamId) {
             $ionicPopup.show({
                 templateUrl: 'popup-template.html',
                 title: 'Enter team name to search',
@@ -682,7 +685,7 @@ angular.module('rugbyapp.controllers', ['rugbyapp.filters'])
                         type: 'button-positive',
                         onTap: function (e) {
                             if ($scope.data.search.length > 0) {
-                                var searchResult = MatchFactory.teamSearchResult(teamName, $scope.data.search);
+                                var searchResult = MatchFactory.teamSearchResult(teamId, $scope.data.search);
                                 MatchFactory.searchMatch = searchResult;
                             }
                         }
@@ -704,7 +707,7 @@ angular.module('rugbyapp.controllers', ['rugbyapp.filters'])
                         onTap: function (e) {
 
                             if ($scope.data.search.length > 0) {
-                                var searchResult = MatchFactory.getTeamMatches($scope.data.search);
+                                var searchResult = MatchFactory.getTeamMatchesByName($scope.data.search);
                                 MatchFactory.searchMatch = searchResult;
                             }
                             else
@@ -723,7 +726,7 @@ angular.module('rugbyapp.controllers', ['rugbyapp.filters'])
         //Binding functions
         $scope.lastMatch = function () {
             if ($scope.data != undefined) {
-                var lastMatch = MatchFactory.getLastMatch($scope.data.fullTeamName);
+                var lastMatch = MatchFactory.getLastMatch($scope.data.teamId);
                 if (lastMatch != null) {
                     return lastMatch;
                 }
@@ -736,9 +739,9 @@ angular.module('rugbyapp.controllers', ['rugbyapp.filters'])
         $scope.teamFactory = TeamFactory;
         $scope.data = {
             search: '',
-            fullTeamName: TeamFactory.team.fullTeamName,
+            fullClubName: TeamFactory.team.fullClubName,
             teamId: TeamFactory.team.teamId,
-            abbrTeamName: TeamFactory.team.abbrTeamName,
+            teamName: TeamFactory.team.teamName,
             clubAddress: TeamFactory.team.clubAddress,
             townCity: TeamFactory.team.townCity,
             country: TeamFactory.team.country,
@@ -892,8 +895,8 @@ angular.module('rugbyapp.controllers', ['rugbyapp.filters'])
             var team = {
                 teamId: $scope.data.teamId,
                 isMyTeam: isMyTeam,
-                fullTeamName: $scope.data.fullTeamName,
-                abbrTeamName: $scope.data.abbrTeamName,
+                fullClubName: $scope.data.fullClubName,
+                teamName: $scope.data.teamName,
                 clubAddress: $scope.data.clubAddress,
                 townCity: $scope.data.townCity,
                 country: $scope.data.country,
@@ -914,7 +917,7 @@ angular.module('rugbyapp.controllers', ['rugbyapp.filters'])
                 }
 
                 if (updateMatchTeams) {
-                    MatchFactory.updateTeamNames(oldTeamName, $scope.data.fullTeamName);
+                    MatchFactory.updateTeamNames(oldTeamName, $scope.data.teamName);
                 }
             });
         };

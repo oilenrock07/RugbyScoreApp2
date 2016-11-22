@@ -4,7 +4,7 @@
             <div class="col" style="padding-right: 10px;">
                 <div class="label-score align-right divider" ng-bind="team1Score()"></div>
                 <div class="divider">
-                    <input type="text" ng-hide-on-enter ng-model="data.team1" select-on-click ng-change="searchTeam('team1', data.team1)" autocomplete="off" />
+                    <input type="text" ng-hide-on-enter ng-model="data.teamName1" select-on-click ng-change="searchTeam('team1', data.team1)" autocomplete="off" />
                     <div ng-include="'templates/match/_autocompleteteam1.html'"></div>
                 </div>
                 <div>Trys</div>
@@ -31,7 +31,7 @@
             <div class="col" style="padding-left: 10px;"">
                     <div class="label-score align-left divider" ng-bind="team2Score()"></div>
                     <div class="divider">
-                        <input type="text" ng-hide-on-enter ng-model="data.team2" select-on-click ng-change="searchTeam('team2', data.team2)" autocomplete="off"/>
+                        <input type="text" ng-hide-on-enter ng-model="data.teamName2" select-on-click ng-change="searchTeam('team2', data.team2)" autocomplete="off"/>
                     <div ng-include=" 'templates/match/_autocompleteteam2.html'"></div>
                     </div>
                     <div>Trys</div>

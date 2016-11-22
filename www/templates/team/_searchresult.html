@@ -1,3 +1,3 @@
 <div class="autocomplete-result-search" ng-show="showAutoCompleteTeamResult">
-    <li class="item" ng-repeat="team in matchFactory.autoCompleteTeamResult" ng-click="selectAutoCompleteSearchTeam(team.team1 == searchTeamName ? team.team2 : team.team1)">{{team.team1 == searchTeamName ? team.team2 : team.team1}}</li>
+    <li class="item" ng-repeat="team in matchFactory.autoCompleteTeamResult" ng-click="selectAutoCompleteSearchTeam(team.team1 == searchTeamName ? team.teamName2 : team.teamName1)">{{team.team1 == searchTeamName ? team.teamName2 : team.teamName1}}</li>
 </div>

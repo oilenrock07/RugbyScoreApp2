@@ -12,12 +12,12 @@
 
     <ion-content class="content">
         <div class="list">
-            <div class="item" ng-repeat="team in teamFactory.searchTeams | orderBy: 'fullTeamName'">
+            <div class="item" ng-repeat="team in teamFactory.searchTeams | orderBy: 'fullClubName'">
                 <div class="row" ng-click="teamDetail(team.teamId)">
                     <div class="col">
-                        <span class="team-label">Team Name</span><br/>
-                        <span class="item-text-wrap">{{team.fullTeamName}}</span><br/>
-                        <span class="team-label team-location">Location</span>
+                        <span class="team-label">Full Club Name</span><br/>
+                        <span class="item-text-wrap">{{team.fullClubName}}</span><br/>
+                        <span class="team-label team-location">Town / City</span>
                     </div>
                 </div>
                 <div class="row">
@@ -25,7 +25,7 @@
                         <span>{{team.townCity}}</span>
                     </div>
                     <div class="col col-20">
-                        <span class="link" ng-click="teamResult(team.fullTeamName)">
+                        <span class="link" ng-click="teamResult(team.teamId)">
                             Team Results
                             <i class="icon ion-chevron-right"></i>
                         </span>

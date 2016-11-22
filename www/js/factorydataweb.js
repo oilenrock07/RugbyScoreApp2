@@ -21,26 +21,26 @@ angular.module('rugbyapp.data', [])
         var loadTeams = function (callBack) {
             var teams = [{
                 teamId: 1,
-                fullTeamName: 'Chicago Bulls',
+                fullClubName: 'Chicago Bulls',
                 townCity: 'Chicago',
-                abbrTeamName: 'cb'
+                teamName: 'cb'
             },
             {
                 teamId: 2,
-                fullTeamName: 'XYZ Team',
+                fullClubName: 'XYZ Team',
                 townCity: 'Planet X',
-                abbrTeamName: 'xxx'
+                teamName: 'xxx'
             },
             {
                 teamId:3,
-                fullTeamName: 'ABCD1234',
+                fullClubName: 'ABCD1234',
                 townCity: 'Baras',
-                abbrTeamName: 'a1'
+                teamName: 'a1'
             },
             {
                 teamId: 4,
-                fullTeamName: 'Chicago Balls',
-                abbrTeamName: 'bl',
+                fullClubName: 'Chicago Balls',
+                teamName: 'bl',
                 townCity: 'Balls'
             }];
 
