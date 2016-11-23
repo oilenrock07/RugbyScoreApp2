@@ -5,7 +5,7 @@
 
                 <label class="item item-input item-stacked-label">
                     <span class="input-label">Team A</span>
-                    <input type="text" ng-hide-on-enter maxlength="30" placeholder="Enter Full Team Name A" ng-model="data.teamName1" ng-change="searchTeam('team1', data.teamName1)" autocomplete="off">
+                    <input type="text" ng-hide-on-enter maxlength="30" placeholder="Enter Team Name A" ng-model="data.teamName1" ng-change="searchTeam('team1', data.teamName1)" autocomplete="off">
                 </label>
                 <div class="autocomplete" ng-include="'templates/match/_autocompleteteam1.html'"></div>
 
@@ -13,7 +13,7 @@
 
                 <label class="item item-input item-stacked-label">
                     <span class="input-label">Team B</span>
-                    <input type="text" ng-hide-on-enter maxlength="30" placeholder="Enter Full Team Name B" ng-model="data.teamName2" ng-change="searchTeam('team2', data.teamName2)"  autocomplete="off">                
+                    <input type="text" ng-hide-on-enter maxlength="30" placeholder="Enter Team Name B" ng-model="data.teamName2" ng-change="searchTeam('team2', data.teamName2)"  autocomplete="off">                
                 </label>
                 <div class="autocomplete" ng-include="'templates/match/_autocompleteteam2.html'"></div>
 
