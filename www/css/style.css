@@ -603,6 +603,14 @@ ion-content .scroll{
      height: 82% !important;
 }
 
+/** iPhone 4/4s **/
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-device-pixel-ratio: 2) and (device-aspect-ratio: 2/3) and (orientation:portrait)
+{
+    .match-label strong{
+        font-size: 10px !important;
+    }
+}
+
 /** Tablets **/
 @media screen and (min-width:320px) and (orientation:landscape) {
     .match ion-content{

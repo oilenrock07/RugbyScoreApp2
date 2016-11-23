@@ -2,7 +2,7 @@
     <ion-content>
         <div class="row">
             <div class="col col-100 text-center">
-                <input class="match-title" ng-hide-on-enter maxlength="30" placeholder="Enter Full Club Name A" ng-model="data.teamName1" ng-keyup="team1KeyUp()" ng-change="searchTeam('team1', data.teamName1)" autocomplete="off"></input>
+                <input class="match-title" ng-hide-on-enter maxlength="30" placeholder="Enter Team Name A" ng-model="data.teamName1" ng-keyup="team1KeyUp()" ng-change="searchTeam('team1', data.teamName1)" autocomplete="off"></input>
                 <div class="autocomplete" ng-include="'templates/match/_autocompleteteam1.html'"></div>
             </div>
         </div>
@@ -58,7 +58,7 @@
 
         <div class="row">
             <div class="col text-center">
-                <input class="match-title" ng-hide-on-enter maxlength="30" placeholder="Enter Full Club Name B" ng-model="data.teamName2" ng-keyup="team2KeyUp()" ng-change="searchTeam('team2', data.teamName2)" autocomplete="off"></input>
+                <input class="match-title" ng-hide-on-enter maxlength="30" placeholder="Enter Team Name B" ng-model="data.teamName2" ng-keyup="team2KeyUp()" ng-change="searchTeam('team2', data.teamName2)" autocomplete="off"></input>
                 <div class="autocomplete" ng-include="'templates/match/_autocompleteteam2.html'"></div>
             </div>
         </div>
