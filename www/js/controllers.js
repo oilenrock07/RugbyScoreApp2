@@ -554,7 +554,7 @@ angular.module('rugbyapp.controllers', ['rugbyapp.filters'])
             /*Team 1*/
             ctx.font = "18px Arial";
             ctx.textAlign = "left";
-            ctx.fillText('Trys', 30, 240);
+            ctx.fillText('Try', 30, 240);
 
             ctx.font = "bold 18px Arial";
             ctx.textAlign = "left";
@@ -571,7 +571,7 @@ angular.module('rugbyapp.controllers', ['rugbyapp.filters'])
 
             ctx.font = "18px Arial";
             ctx.textAlign = "left";
-            ctx.fillText('Drop Goals', 30, 350);
+            ctx.fillText('Drop Goal', 30, 350);
 
             ctx.font = "bold 18px Arial";
             ctx.textAlign = "left";
@@ -598,7 +598,7 @@ angular.module('rugbyapp.controllers', ['rugbyapp.filters'])
             /*Team 2*/
             ctx.font = "18px Arial";
             ctx.textAlign = "left";
-            ctx.fillText('Trys', 335, 240);
+            ctx.fillText('Try', 335, 240);
 
             ctx.font = "bold 18px Arial";
             ctx.textAlign = "left";
@@ -615,7 +615,7 @@ angular.module('rugbyapp.controllers', ['rugbyapp.filters'])
 
             ctx.font = "18px Arial";
             ctx.textAlign = "left";
-            ctx.fillText('Drop Goals', 335, 350);
+            ctx.fillText('Drop Goal', 335, 350);
 
             ctx.font = "bold 18px Arial";
             ctx.textAlign = "left";
