@@ -526,8 +526,8 @@ angular.module('rugbyapp.controllers', ['rugbyapp.filters'])
             ctx.textAlign = "left";
             ctx.fillText($scope.team2Score(), 335, 170);
 
-            var team1Name = spliceTeamName($scope.data.team1);
-            var team2Name = spliceTeamName($scope.data.team2);
+            var team1Name = spliceTeamName($scope.data.teamName1);
+            var team2Name = spliceTeamName($scope.data.teamName2);
 
             ctx.font = "bold 18px Arial";
             ctx.textAlign = "right";
@@ -662,10 +662,10 @@ angular.module('rugbyapp.controllers', ['rugbyapp.filters'])
             buildImage().then(function (canvas) {
 
                 var team1Wins = parseInt($scope.team1Score()) > parseInt($scope.team2Score());
-                var message = team1Wins ? $scope.data.team1 + ' beats ' + $scope.data.team2 : $scope.data.team2 + ' beats ' + $scope.data.team1;
+                var message = team1Wins ? $scope.data.teamName1 + ' beats ' + $scope.data.teamName2 : $scope.data.teamName2 + ' beats ' + $scope.data.teamName1;
 
                 if (parseInt($scope.team1Score()) == parseInt($scope.team2Score()))
-                    message = 'A draw between ' + $scope.data.team1 + ' vs ' + $scope.data.team2;
+                    message = 'A draw between ' + $scope.data.teamName1 + ' vs ' + $scope.data.teamName2;
 
                 message += ' with a score of ' + (team1Wins ? $scope.team1Score() + ' - ' + $scope.team2Score() : $scope.team2Score() + ' - ' + $scope.team1Score());
 
