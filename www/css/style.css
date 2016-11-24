@@ -611,6 +611,16 @@ ion-content .scroll{
     }
 }
 
+/** iPhone 5/5s **/
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 568px) 
+and (orientation : portrait) { 
+        .match-label strong{
+        font-size: 10px !important;
+    }
+}
+
 /** Tablets **/
 @media screen and (min-width:320px) and (orientation:landscape) {
     .match ion-content{
