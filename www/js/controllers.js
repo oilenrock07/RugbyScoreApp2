@@ -90,6 +90,9 @@ angular.module('rugbyapp.controllers', ['rugbyapp.filters'])
             if ($rootScope.page != 'start-match')
                 return;
 
+            MatchFactory.match.teamName1 = MatchFactory.match.teamName1 != '' ? MatchFactory.match.teamName1 : 'TEAM A';
+            MatchFactory.match.teamName2 = MatchFactory.match.teamName2 != '' ? MatchFactory.match.teamName2 : 'TEAM B';
+
             $scope.icon = 'score-icon';
             $rootScope.page = "score";
             $state.go('app.score');
