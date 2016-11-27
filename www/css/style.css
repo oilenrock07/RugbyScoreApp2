@@ -333,7 +333,7 @@ input[type="text"], input[type="number"]{
 
 /** Buttons **/
 .link{
-    color: #0071BC;
+    color: #387ef5;
     float: right;
     cursor: pointer;
 }
@@ -358,7 +358,7 @@ div.button-footer{
 
 .button-footer-wrap div.button-footer button{
     width: 100%;
-    color: #92185d !important;
+    color: #387ef5 !important;
     text-align: right;
     border-color: #FBAE17 !important;
     background-color: #ffffff;

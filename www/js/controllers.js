@@ -752,7 +752,7 @@ angular.module('rugbyapp.controllers', ['rugbyapp.filters'])
         };
         $scope.teamLastMatch = $scope.lastMatch();
 
-        $scope.teamResultText = $state.current.tabGroup == 'myteam' ? 'My Team Result' : 'Team Result';
+        $scope.teamResultText = $state.current.tabGroup == 'myteam' ? 'My Team Results' : 'Team Results';
         $scope.myTeamId = SettingFactory.myTeam;
         $scope.showSearch = false;
 
