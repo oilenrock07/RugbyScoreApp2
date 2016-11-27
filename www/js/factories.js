@@ -403,6 +403,7 @@ angular.module('rugbyapp.factories', ['ngCordova'])
   .factory('SettingFactory', function (DataFactory) {
     //entities
     setting = {};
+    device = {};
     setting.myTeam = 0;
     var updateMyTeam = function (value, callBack) {
       DataFactory.setting.updateSetting(value, callBack);
@@ -429,7 +430,8 @@ angular.module('rugbyapp.factories', ['ngCordova'])
     return {
       myTeam: setting.myTeam,
       updateMyTeam: updateMyTeam,
-      appdata: appdata
+      appdata: appdata,
+      device: device
     }
   })
 
