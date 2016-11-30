@@ -786,31 +786,48 @@ angular.module('rugbyapp.controllers', ['rugbyapp.filters'])
         }
 
         $scope.openGoogleMaps = function (location) {
-            document.addEventListener("deviceready", function () {
+            var url;
+            var device = SettingFactory.device;
+            var isWebView = device.isWebView();
+            var isIPad = device.isIPad();
+            var isIOS = device.isIOS();
+            var isAndroid = device.isAndroid();
+            var isWindowsPhone = device.isWindowsPhone();
 
-                var scheme;
-                var url;
-                if (device.platform === SettingFactory.appdata.platform.iOs) {
-                    scheme = SettingFactory.appdata.scheme.iOs;
-                    url = SettingFactory.appdata.url.iOs;
-                }
-                else if (device.platform === SettingFactory.appdata.platform.android) {
-                    scheme = SettingFactory.appdata.scheme.android;
-                    url = SettingFactory.appdata.url.android;
-                }
+            if (isIPad || isIOS) {
+                url = SettingFactory.appdata.url.iOs;
+            }
+            else if(isAndroid) {
+                url = SettingFactory.appdata.url.android;
+            }
 
-                $cordovaAppAvailability.check(scheme)
-                    .then(function () {
-                        try {
-                            window.open(url + location, '_system', 'location=yes');
-                        }
-                        catch (ex) {
-                            alert(ex);
-                        }
-                    }, function () {
-                        window.open(SettingFactory.appdata.webUrl.url);
-                    });
-            }, false);
+            window.open(url + location, '_system', 'location=yes');
+
+            // document.addEventListener("deviceready", function () {
+
+            //     var scheme;
+            //     var url;
+            //     if (device.platform === SettingFactory.appdata.platform.iOs) {
+            //         scheme = SettingFactory.appdata.scheme.iOs;
+            //         url = SettingFactory.appdata.url.iOs;
+            //     }
+            //     else if (device.platform === SettingFactory.appdata.platform.android) {
+            //         scheme = SettingFactory.appdata.scheme.android;
+            //         url = SettingFactory.appdata.url.android;
+            //     }
+
+            //     $cordovaAppAvailability.check(scheme)
+            //         .then(function () {
+            //             try {
+            //                 window.open(url + location, '_system', 'location=yes');
+            //             }
+            //             catch (ex) {
+            //                 alert(ex);
+            //             }
+            //         }, function () {
+            //             window.open(SettingFactory.appdata.webUrl.url);
+            //         });
+            // }, false);
         };
 
         $scope.editTeam = function (id) {
