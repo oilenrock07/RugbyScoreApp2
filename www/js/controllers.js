@@ -53,10 +53,14 @@ angular.module('rugbyapp.controllers', ['rugbyapp.filters'])
         }
 
         var showLeavingConfirmation = function (redirect) {
-            if ($state.current.name == 'app.match') {
+            var template = 'If you leave the tracking screen you will lose your current score. Are you sure you want to leave?';
+            if ($state.current.name == 'app.score')
+                template = 'If you leave the Final Score page you will lose your current score. Are you sure you want to leave?';
+
+            if ($state.current.name == 'app.match' || $state.current.name == 'app.score') {
                 var confirmPopup = $ionicPopup.confirm({
                     title: 'Important',
-                    template: 'If you leave the tracking screen you will lose your current score. Are you sure you want to leave?',
+                    template: template,
                     cancelText: 'No',
                     okText: 'Yes'
                 }).then(function (res) {
@@ -134,6 +138,17 @@ angular.module('rugbyapp.controllers', ['rugbyapp.filters'])
             teamName2: MatchFactory.match.teamName2,
         };
 
+        $scope.$watch("data.teamName1", function (newValue, oldValue) {
+            if (newValue.length > 38) {
+                $scope.data.teamName1 = oldValue;
+            }
+        });
+
+        $scope.$watch("data.teamName2", function (newValue, oldValue) {
+            if (newValue.length > 38) {
+                $scope.data.teamName2 = oldValue;
+            }
+        });
 
         //functions
         var getScopeMatch = function () {
@@ -516,7 +531,7 @@ angular.module('rugbyapp.controllers', ['rugbyapp.filters'])
             ctx.textAlign = "left";
             ctx.fillText('Track match scores and share results', 185, 85);
             ctx.fillStyle = "blue";
-            ctx.fillText('www.rugbyscoretracker.co.uk', 185, 105);
+            ctx.fillText('www.rugbyscoretracker.com', 185, 105);
             ctx.fillStyle = "black";
             ctx.fillText('Download FREE from the app store', 185, 125);
 
@@ -671,8 +686,7 @@ angular.module('rugbyapp.controllers', ['rugbyapp.filters'])
                     message = 'A draw between ' + $scope.data.teamName1 + ' vs ' + $scope.data.teamName2;
 
                 message += ' with a score of ' + (team1Wins ? $scope.team1Score() + ' - ' + $scope.team2Score() : $scope.team2Score() + ' - ' + $scope.team1Score());
-
-                return $cordovaSocialSharing.share(message, 'RugbyScoreTracker', canvas.toDataURL('image/jpeg', 1), 'www.rugbyscoretracker.co.uk');
+                return $cordovaSocialSharing.share(message, 'RugbyScoreTracker', canvas.toDataURL('image/jpeg', 1), 'www.rugbyscoretracker.com');
             })
         }
 
@@ -735,6 +749,7 @@ angular.module('rugbyapp.controllers', ['rugbyapp.filters'])
                 }
             }
         }
+        
 
         TeamFactory.searchTeams = TeamFactory.teams;
         $scope.isMyTeam = $state.params.isMyTeam;
@@ -750,6 +765,13 @@ angular.module('rugbyapp.controllers', ['rugbyapp.filters'])
             country: TeamFactory.team.country,
             postCode: TeamFactory.team.postCode,
         };
+
+        $scope.$watch("data.teamName", function (newValue, oldValue) {
+            if (newValue.length > 38) {
+                $scope.data.teamName = oldValue;
+            }
+        });
+
         $scope.teamLastMatch = $scope.lastMatch();
 
         $scope.teamResultText = $state.current.tabGroup == 'myteam' ? 'My Team Results' : 'Team Results';
@@ -797,7 +819,7 @@ angular.module('rugbyapp.controllers', ['rugbyapp.filters'])
             if (isIPad || isIOS) {
                 url = SettingFactory.appdata.url.iOs;
             }
-            else if(isAndroid) {
+            else if (isAndroid) {
                 url = SettingFactory.appdata.url.android;
             }
 

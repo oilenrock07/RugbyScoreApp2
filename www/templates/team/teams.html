@@ -15,7 +15,7 @@
             <div class="item" ng-repeat="team in teamFactory.searchTeams | orderBy: 'fullClubName'">
                 <div class="row" ng-click="teamDetail(team.teamId)">
                     <div class="col">
-                        <span class="team-label">Team Name</span><br/>
+                        <span class="team-label link-color">Team Name</span><br/>
                         <span class="item-text-wrap">{{team.teamName}}</span><br/>
                         <span class="team-label team-location">Town / City</span>
                     </div>
