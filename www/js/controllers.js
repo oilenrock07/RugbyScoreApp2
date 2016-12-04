@@ -686,7 +686,8 @@ angular.module('rugbyapp.controllers', ['rugbyapp.filters'])
                     message = 'A draw between ' + $scope.data.teamName1 + ' vs ' + $scope.data.teamName2;
 
                 message += ' with a score of ' + (team1Wins ? $scope.team1Score() + ' - ' + $scope.team2Score() : $scope.team2Score() + ' - ' + $scope.team1Score());
-                return $cordovaSocialSharing.share(message, 'RugbyScoreTracker', canvas.toDataURL('image/jpeg', 1), 'www.rugbyscoretracker.com');
+                message += '\nDownload the app at www.rugbyscoretracker.com'
+                return $cordovaSocialSharing.share(message, 'RugbyScoreTracker', canvas.toDataURL('image/jpeg', 1));
             })
         }
 
