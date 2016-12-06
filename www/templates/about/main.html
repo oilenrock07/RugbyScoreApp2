@@ -1,5 +1,5 @@
 <ion-view view-title="Match" hide-back-button="true">
-    <ion-content ng-controller="AppController" class="about-list content">
+    <ion-content class="about-list content">
         <div class="list">
             <div class="item row" ui-sref="app.about">
                 <div class="col text-center">
@@ -16,9 +16,9 @@
                     Using The App
                 </div>
             </div>
-            <div class="item row" ui-sref="app.about">
+            <div class="item row" ui-sref="app.about" ng-click="openMarket()">
                 <div class="col text-center">
-                    Check for updates
+                    Purchase Pro Version
                 </div>
             </div>
         </div>
